@@ -1,0 +1,7 @@
+# Clear python alpine image
+FROM python:alpine
+RUN apk update \
+&& apk add tzdata \
+&& cp /usr/share/zoneinfo/Europe/Moscow /etc/localtime \
+&& echo "Europe/Moscow" >  /etc/timezone
+CMD date

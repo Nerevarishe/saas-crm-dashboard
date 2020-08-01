@@ -1,0 +1,5 @@
+FROM nerevarishe/node-alpine:latest
+WORKDIR /root
+COPY ../frontend/package* ./
+RUN npm install \
+&& npm build

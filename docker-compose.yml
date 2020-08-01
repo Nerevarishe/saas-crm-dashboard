@@ -1,0 +1,48 @@
+version: "3.8"
+services:
+  db:
+    image: nerevarishe/db:latest
+    environment:
+      SOME_VARIABLES: "some_variables"
+    volumes:
+      - some_volume:/path
+    networks:
+      - back
+    restart: always
+  
+  backend:
+    image: nerevarishe/backend:latest
+    environment:
+      SOME_VARIABLES: "some_variables"
+    volumes:
+      - upload_dir:/path
+    networks:
+      - back
+      - front
+    restart: always
+    depends_on:
+      - db
+      
+    frontend:
+      image: nerevarishe/frontend:latest
+    environment:
+      SOME_VARIABLES: "some_variables"
+    networks:
+      - front
+    restart: always
+    depends_on:
+      - db
+      - backend
+      
+    cron:
+      image: nerevarishe/cron:latest
+    environment:
+      SOME_VARIABLES: "some_variables"
+    networks:
+      - back
+      - front
+    restart: always
+    depends_on:
+      - db
+      - backend
+      - frontend

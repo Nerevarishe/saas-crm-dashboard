@@ -1,0 +1,7 @@
+# Clear alpine image
+FROM alpine:latest
+RUN apk update \
+&& apk add tzdata \
+&& cp /usr/share/zoneinfo/Europe/Moscow /etc/localtime \
+&& echo "Europe/Moscow" >  /etc/timezone
+CMD date
