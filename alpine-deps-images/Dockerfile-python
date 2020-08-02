@@ -1,6 +1,6 @@
 FROM nerevarishe/python-alpine:latest
 WORKDIR /root
-COPY ../backend/requirements.txt ./
+COPY ./backend/requirements.txt ./
 RUN pip install --no-cache-dir -U pip wheel setuptools \
 && pip install --no-cache-dir -r requirements.txt
 CMD pip list

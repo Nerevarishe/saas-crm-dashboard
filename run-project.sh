@@ -1,20 +1,32 @@
 #!/bin/bash
 
-echo 'Building default images'
-docker build -f ./alpine-default-images/Dockerfile-clear-alpine-image -t nerevarishe/alpine:latest
-docker build -f ./alpine-default-images/Dockerfile-python-alpine-image -t nerevarishe/python-alpine:latest
-docker build -f ./alpine-default-images/Dockerfile-node-alpine-image -t nerevarishe/node-alpine:latest
-docker build -f ./alpine-default-images/Dockerfile-nginx-alpine-image -t nerevarishe/nginx-alpine:latest
+printf 'Building default images\n'
+printf 'Build clear Alpine image'
+#docker build -t nerevarishe/alpine:latest -f ./alpine-default-images/Dockerfile-clear-alpine-image .
+printf '\n\n\n'
+printf 'Build clear python alpine image'
+#docker build -t nerevarishe/python-alpine:latest -f ./alpine-default-images/Dockerfile-python-alpine-image .
+printf '\n\n\n'
+printf 'Build clear node alpine image'
+#docker build -t nerevarishe/node-alpine:latest -f ./alpine-default-images/Dockerfile-node-alpine-image .
+printf '\n\n\n'
+printf 'Build clear nginx alpine image'
+#docker build -t nerevarishe/nginx-alpine:latest -f ./alpine-default-images/Dockerfile-nginx-alpine-image .
+printf '\n\n\n'
 # Build database image
 
-echo 'Building dependencies images'
-# Build python image with dependencies
-# Build node image with dependencies
+printf 'Building dependencies images'
+printf 'Build python image with dependencies'
+#docker build -t nerevarishe/saas-crm-dashboard-python-dependencies:latest -f ./alpine-deps-images/Dockerfile-python .
+printf '\n\n\n'
+printf 'Build node image with dependencies'
+#docker build -t nerevarishe/saas-crm-dashboard-node-dependencies:latest -f ./alpine-deps-images/Dockerfile-node .
+printf '\n\n\n'
 
-echo 'Building web app'
+#printf 'Building web app'
 # Build backend
 # Build frontend
 # Build cron
 
-echo 'Srtarting app'
-docker-compose up -d
+#printf 'Srtarting app'
+# docker-compose up -d
