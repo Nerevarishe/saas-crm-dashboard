@@ -2,3 +2,7 @@
 	path = frontend
 	url = git@github.com:Nerevarishe/training-react-saas-crm.git
 	branch = master
+[submodule "backend"]
+	path = backend
+	url = git@github.com:Nerevarishe/training-flask-backend-saas-crm.git
+	branch = master
