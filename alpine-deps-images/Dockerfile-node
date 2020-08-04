@@ -1,4 +1,4 @@
 FROM nerevarishe/node-alpine:latest
-WORKDIR /root
+WORKDIR /root/frontend
 COPY ./frontend/package* ./
 RUN npm install
