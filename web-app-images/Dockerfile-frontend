@@ -1,3 +1,4 @@
 FROM nerevarishe/nginx-alpine:latest
+COPY ./nginx-conf/ /etc/nginx/conf.d/
 COPY --from=nerevarishe/saas-crm-dashboard-node-build:latest /root/frontend/build/ /usr/share/nginx/html/
 CMD ["nginx", "-g", "daemon off;"]
