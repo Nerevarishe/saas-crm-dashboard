@@ -1,2 +1,6 @@
-venv/
-node_modules/
+./backend/venv
+./frontend/node_modules
+./backend/.idea
+./backend/.vscode
+./frontend/.idea
+./frontend/.vscode
