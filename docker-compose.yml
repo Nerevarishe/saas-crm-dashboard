@@ -8,6 +8,8 @@ services:
   
   backend:
     image: nerevarishe/saas-crm-dashboard-backend
+    environment:
+      - MONGODB_HOST=db
     networks:
       - back
       - front
