@@ -34,7 +34,7 @@ docker build -t nerevarishe/saas-crm-dashboard-backend -f ./web-app-images/Docke
 # Build frontend
 printf 'Building frontend image\n'
 docker build -t nerevarishe/saas-crm-dashboard-node-build:latest -f ./web-app-images/Dockerfile-frontend-build .
-docker build -t nerevarishe/saas-crm-dashboard-frontend -f ./web-app-images/Dockerfile-frontend .
+docker build -t nerevarishe/saas-crm-dashboard-frontend:latest -f ./web-app-images/Dockerfile-frontend .
 printf '\n\n\n'
 # Build cron
 

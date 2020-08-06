@@ -1,21 +1,13 @@
 version: "3.8"
 services:
   db:
-    image: nerevarishe/db:latest
-    environment:
-      SOME_VARIABLES: "some_variables"
-    volumes:
-      - some_volume:/path
+    image: nerevarishe/mongo:latest
     networks:
       - back
     restart: always
   
   backend:
-    image: nerevarishe/backend:latest
-    environment:
-      SOME_VARIABLES: "some_variables"
-    volumes:
-      - upload_dir:/path
+    image: nerevarishe/saas-crm-dashboard-backend
     networks:
       - back
       - front
@@ -23,10 +15,10 @@ services:
     depends_on:
       - db
       
-    frontend:
-      image: nerevarishe/frontend:latest
-    environment:
-      SOME_VARIABLES: "some_variables"
+  frontend:
+    image: nerevarishe/saas-crm-dashboard-frontend
+    ports:
+      - 80:80
     networks:
       - front
     restart: always
@@ -34,15 +26,19 @@ services:
       - db
       - backend
       
-    cron:
-      image: nerevarishe/cron:latest
-    environment:
-      SOME_VARIABLES: "some_variables"
-    networks:
-      - back
-      - front
-    restart: always
-    depends_on:
-      - db
-      - backend
-      - frontend
+    #cron:
+    #  image: nerevarishe/cron:latest
+    #environment:
+    #  SOME_VARIABLES: "some_variables"
+    #networks:
+    #  - back
+    #  - front
+    #restart: always
+    #depends_on:
+    #  - db
+    #  - backend
+    #  - frontend
+
+networks:
+  back:
+  front:
