@@ -1,27 +1,32 @@
 version: "3.8"
 services:
   db:
-    image: nerevarishe/mongo:latest
-    networks:
-      - back
-    restart: always
-  
-  backend:
-    image: nerevarishe/saas-crm-dashboard-backend
+    image: $DB_IMAGE
     environment:
       # MongoDB image env:
       - MONGO_INITDB_ROOT_USERNAME=$DB_ROOT_USER
       - MONGO_INITDB_ROOT_PASSWORD=$DB_ROOT_PASSWORD
       - MONGO_INITDB_DATABASE=$DB_NAME
       # Python MongoEngine library env:
+      - MONGODB_USERNAME=$DB_USER
+      - MONGODB_PASSWORD=$DB_PASSWORD
+      - MONGODB_DB=$DB_NAME
+    volumes:
+      - ./scripts/mongodb:/docker-entrypoint-initdb.d:ro
+      - mongo-db-data:/data/db
+    networks:
+      - back
+    restart: always
+  
+  backend:
+    image: $BACKEND_IMAGE
+    environment:
+      # Python MongoEngine library env:
       - MONGODB_HOST=$DB_HOST
       - MONGODB_PORT=$DB_PORT
       - MONGODB_USERNAME=$DB_USER
       - MONGODB_PASSWORD=$DB_PASSWORD
       - MONGODB_DB=$DB_NAME
-    volumes:
-      - ./scripts/mongodb/mongoDbCreateUser.sh:/docker-entrypoint-initdb.d/mongoDbCreateUser.sh
-      - mongo-db-data:/data/db
     networks:
       - back
       - front
@@ -30,7 +35,7 @@ services:
       - db
       
   frontend:
-    image: nerevarishe/saas-crm-dashboard-frontend
+    image: $FRONTEND_IMAGE
     ports:
       - 80:80
     networks:
@@ -41,7 +46,7 @@ services:
       - backend
       
     #cron:
-    #  image: nerevarishe/cron:latest
+    #  image: $CRON_IMAGE
     #environment:
     #  SOME_VARIABLES: "some_variables"
     #networks:

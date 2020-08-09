@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Export all variables from .env
+# export $(egrep -v '^#' .env | xargs)
+source .env
+
 printf  '\e[1;32m%-6s\e[m\n' "Building default images"
 printf '\e[1;32m%-6s\e[m\n' "Build clear Alpine image"
 docker build -t nerevarishe/alpine:latest -f ./alpine-default-images/Dockerfile-clear-alpine-image .
@@ -13,31 +17,28 @@ printf "\n\n\n"
 printf '\e[1;32m%-6s\e[m\n' "Build clear nginx alpine image"
 docker build -t nerevarishe/nginx-alpine:latest -f ./alpine-default-images/Dockerfile-nginx-alpine-image .
 printf "\n\n\n"
-# Build DB
 printf '\e[1;32m%-6s\e[m\n' "Create MongoDB default image"
 docker build -t nerevarishe/mongo:latest -f ./DB-default-images/Dockerfile-mongo-default-image .
 printf "\n\n\n"
 
 printf '\e[1;32m%-6s\e[m\n' "Building dependencies images"
 printf '\e[1;32m%-6s\e[m\n' "Build python image with dependencies"
-docker build -t nerevarishe/saas-crm-dashboard-python-dependencies:latest -f ./alpine-deps-images/Dockerfile-python .
+docker build -t $DOCKER_IMAGE_PREFIX-python-dependencies:latest -f ./alpine-deps-images/Dockerfile-python .
 printf "\n\n\n"
 printf '\e[1;32m%-6s\e[m\n' "Build node image with dependencies"
-docker build -t nerevarishe/saas-crm-dashboard-node-dependencies:latest -f ./alpine-deps-images/Dockerfile-node .
+docker build -t $DOCKER_IMAGE_PREFIX-node-dependencies:latest -f ./alpine-deps-images/Dockerfile-node .
 printf "\n\n\n"
 
 
 printf '\e[1;32m%-6s\e[m\n' "Building web app"
-# Build backend
 printf '\e[1;32m%-6s\e[m\n' "Build backend image"
-docker build -t nerevarishe/saas-crm-dashboard-backend -f ./web-app-images/Dockerfile-backend .
-# Build frontend
+docker build -t $DOCKER_IMAGE_PREFIX-backend:latest -f ./web-app-images/Dockerfile-backend .
 printf '\e[1;32m%-6s\e[m\n' "Building frontend image"
-docker build -t nerevarishe/saas-crm-dashboard-node-build:latest -f ./web-app-images/Dockerfile-frontend-build .
-docker build -t nerevarishe/saas-crm-dashboard-frontend:latest -f ./web-app-images/Dockerfile-frontend .
+docker build -t $DOCKER_IMAGE_PREFIX-node-build:latest -f ./web-app-images/Dockerfile-frontend-build .
+docker build -t $DOCKER_IMAGE_PREFIX-frontend:latest -f ./web-app-images/Dockerfile-frontend .
 printf "\n\n\n"
-# Build cron
-
+# TODO: Build cron
+# TODO: Delete env variables added in beginig of script
 printf '\e[1;32m%-6s\e[m\n' "Srtarting app"
 docker-compose up -d
 printf "\n\n\n"
