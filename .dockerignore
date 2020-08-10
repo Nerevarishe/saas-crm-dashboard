@@ -4,6 +4,6 @@
 ./backend/.vscode
 ./frontend/.idea
 ./frontend/.vscode
-.env*
+.env
 .git
 .gitignore

@@ -32,6 +32,7 @@ printf "\n\n\n"
 printf '\e[1;32m%-6s\e[m\n' "Building web app"
 printf '\e[1;32m%-6s\e[m\n' "Build backend image"
 docker build -t $DOCKER_IMAGE_PREFIX-backend:latest -f ./web-app-images/Dockerfile-backend .
+printf "\n\n"
 printf '\e[1;32m%-6s\e[m\n' "Building frontend image"
 docker build -t $DOCKER_IMAGE_PREFIX-node-build:latest -f ./web-app-images/Dockerfile-frontend-build .
 docker build -t $DOCKER_IMAGE_PREFIX-frontend:latest -f ./web-app-images/Dockerfile-frontend .
