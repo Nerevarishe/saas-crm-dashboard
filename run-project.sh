@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Export all variables from .env
-# export $(egrep -v '^#' .env | xargs)
 source .env
 
 printf  '\e[1;32m%-6s\e[m\n' "Building default images"
