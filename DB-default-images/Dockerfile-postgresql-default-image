@@ -1,3 +1,0 @@
-FROM postgres:alpine
-RUN cp /usr/share/zoneinfo/Europe/Moscow /etc/localtime \
-&& echo "Europe/Moscow" >  /etc/timezone
